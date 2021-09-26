@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "442879154022",
+    "project_id": "tracker-327005",
+    "storage_bucket": "tracker-327005.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442879154022:android:974c80592c8943e43bdaa7",
+        "android_client_info": {
+          "package_name": "com.example.live_location_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "442879154022-ok2pf9m4o8aead4a284baubr1uhbmcr9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_sM5Go9Y0GajTxmBFNo25dADl6e7g3Ac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "442879154022-ok2pf9m4o8aead4a284baubr1uhbmcr9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
