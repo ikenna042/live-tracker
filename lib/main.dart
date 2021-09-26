@@ -3,17 +3,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:live_location_tracker/mymap.dart';
 import 'package:location/location.dart' as loc;
+import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MaterialApp(home: MyApp()));
+  runApp(MaterialApp(home: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -25,6 +25,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    _requestPermission();
+    location.changeSettings(interval: 300, accuracy: loc.LocationAccuracy.high);
+    location.enableBackgroundMode(enable: true);
   }
 
   @override
@@ -82,7 +85,9 @@ class _MyAppState extends State<MyApp> {
                               icon: Icon(Icons.directions),
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => MyApp()));
+                                    builder: (context) => MyMap(
+                                        user_id:
+                                            snapshot.data!.docs[index].id)));
                               },
                             ),
                           );
@@ -127,5 +132,16 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _locationSubscription = null;
     });
+  }
+
+  _requestPermission() async {
+    var status = await Permission.location.request();
+    if (status.isGranted) {
+      print('done');
+    } else if (status.isDenied) {
+      _requestPermission();
+    } else if (status.isPermanentlyDenied) {
+      openAppSettings();
+    }
   }
 }
